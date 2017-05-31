@@ -4,5 +4,6 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class OpertaionConfig(AppConfig):
+class OperationConfig(AppConfig):
     name = 'operation'
+    verbose_name = 'A操作管理'

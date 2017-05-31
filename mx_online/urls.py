@@ -1,3 +1,4 @@
+# coding=utf-8
 """mx_online URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -14,8 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 import xadmin
-from django.conf.urls import url
+from django.conf.urls import url, include
+from django.views.generic import TemplateView
+
+from organization.views import OrgView
+from users.views import LoginView, RegisterView, ActiveView, ForgetView, ResetView, ModifyPwdView
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
+    url('^$', TemplateView.as_view(template_name='index.html'), name='index'),
+    # 登录注册相关
+    url('^login/$', LoginView.as_view(), name='login'),
+    url('^register/$', RegisterView.as_view(), name='register'),
+    url(r'^captcha/', include('captcha.urls')),
+    url(r'^active/(?P<active_code>.*)/$', ActiveView.as_view(), name='user_active'),
+    url(r'^forget/', ForgetView.as_view(), name='forget_pwd'),
+    url(r'^reset/(?P<active_code>.*)/$', ResetView.as_view(), name='reset_pwd'),
+    url(r'^modify_pwd/', ModifyPwdView.as_view(), name='modify_pwd'),
+
+    # 课程相关
+    url(r'^org_list/', OrgView.as_view(), name='org_list'),
+
 ]
+

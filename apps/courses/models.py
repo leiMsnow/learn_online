@@ -22,6 +22,9 @@ class Course(models.Model):
         verbose_name = '课程信息'
         verbose_name_plural = verbose_name
 
+    def __unicode__(self):
+        return self.name
+
 
 class Lesson(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程')
