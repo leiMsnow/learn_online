@@ -15,6 +15,16 @@ class OrgView(View):
         all_citys = CityDict.objects.all()
         org_count = all_orgs.count()
 
+        # 筛选城市
+        city_id = request.GET.get('city', '')
+        if city_id:
+            all_orgs = all_orgs.filter(city_id=int(city_id))
+
+        # 筛选类别
+        category = request.GET.get('ct', '')
+        if category:
+            all_orgs = all_orgs.filter(category=category)
+
         try:
             page_index = request.GET.get('page', 1)
         except PageNotAnInteger:
@@ -27,4 +37,6 @@ class OrgView(View):
             'all_orgs': current_org,
             'all_citys': all_citys,
             'org_count': org_count,
+            'city_id': city_id,
+            'category': category,
         })
