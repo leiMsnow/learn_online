@@ -30,6 +30,8 @@ class CourseOrg(models.Model):
     fav_count = models.IntegerField(default=0, verbose_name='收藏数量')
     image = models.ImageField(max_length=100, upload_to='org/%Y/%m', verbose_name='机构封面')
     address = models.CharField(max_length=150, verbose_name='机构地址')
+    students = models.IntegerField(default=0, verbose_name='学习人数')
+    courses = models.IntegerField(default=0, verbose_name='课程数')
     create_time = models.DateTimeField(default=datetime.now, verbose_name='创建时间')
 
     class Meta:
@@ -55,4 +57,3 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = '教师信息'
         verbose_name_plural = verbose_name
-
